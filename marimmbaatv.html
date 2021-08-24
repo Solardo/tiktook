@@ -43,6 +43,47 @@ body, html {
   color: white;
 }
 </style>
+
+<style>
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 140px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -75px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+</style>
+
 </head>
 <body>
 
@@ -51,28 +92,31 @@ body, html {
     <h1 style="font-size:50px">Descargar MarimbaTV</h1>
     <h1 style="font-size:20px">Por politicas de Tiktok, no se puede abrir enlaces de descarga, deberás de copiar el link y pegarlo en tú navegador preferido.</h1>
 
-<input type="text" value="https://www.appcreator24.com/app1275543" id="myInput"></p>
-<button onclick="myFunction()">Copiar link de descarga</button>
-  </div>
-</div>
 
+<input type="text" value="https://www.appcreator24.com/app1275543" id="myInput"></p>
+
+<div class="tooltip">
+<button onclick="myFunction()" onmouseout="outFunc()">
+  <span class="Copiar link de descarga" id="myTooltip">Copiar link de descarga</span>
+  </button>
+</div>
 
 <script>
 function myFunction() {
-  /* Get the text field */
   var copyText = document.getElementById("myInput");
-
-  /* Select the text field */
   copyText.select();
-  copyText.setSelectionRange(0, 99999); /* For mobile devices */
-
-  /* Copy the text inside the text field */
+  copyText.setSelectionRange(0, 99999);
   navigator.clipboard.writeText(copyText.value);
   
+  var tooltip = document.getElementById("myTooltip");
+  tooltip.innerHTML = "Texto copiado: " + copyText.value;
+}
 
+function outFunc() {
+  var tooltip = document.getElementById("myTooltip");
+  tooltip.innerHTML = "Copiar link de descarga";
 }
 </script>
-
 
 </body>
 </html>
